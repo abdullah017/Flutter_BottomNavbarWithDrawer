@@ -1,3 +1,4 @@
+import 'package:diyet/drawerMenu.dart';
 import 'package:flutter/material.dart';
 import 'listPage.dart';
 
@@ -17,7 +18,7 @@ class _BnbDemoState extends State<BnbDemo> {
     MenuText("MESAJLARIM SAYFASI"),
     ListPage(),
     MenuText("ARAMA SAYFASI"),
-    MenuText("MENU SAYFASI"),
+    CustomDrawerMenu()
   ];
 
   /// [2] Sayfanın indisini tutuyor.
@@ -32,7 +33,24 @@ class _BnbDemoState extends State<BnbDemo> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildSafeArea(),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30),
+            topLeft: Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: _buildBottomNavigationBar(context),
+        ),
+      ),
     );
   }
 
