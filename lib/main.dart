@@ -1,3 +1,4 @@
+import 'package:diyet/listPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,7 +6,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,68 +22,72 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
- int _currentIndex = 2;
+  int _currentIndex = 2;
   final List<Widget> _children = [
-     MenuText("PROFİLİM SAYFASI"),
-      MenuText("MESAJLARIM SAYFASI"),
-       MenuText("ANA SAYFA"),
-        MenuText("ARAMA SAYFASI"),
-         MenuText("MENU SAYFASI"),
-     
+    MenuText("PROFİLİM SAYFASI"),
+    MenuText("MESAJLARIM SAYFASI"),
+    ListPage(),
+    MenuText("ARAMA SAYFASI"),
+    MenuText("MENU SAYFASI"),
   ];
-
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-       currentIndex: _currentIndex, 
-       onTap:onTabTapped,
-        type: BottomNavigationBarType.fixed,
-       items: [
-         BottomNavigationBarItem(
-           label: "Profilim",
-           icon: new Icon(Icons.account_circle_rounded),
-         ),
-         BottomNavigationBarItem(
-           icon: new Icon(Icons.mail),
-             label: "Messagess",
-         ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.home),
-           label:"Ana Sayfa"
-         ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.search),
-           label:"Ara"
-         ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.menu),
-           label:"Menü"
-         )
-       ],
-     ),
-    body: _children[_currentIndex]
-   );
+        key: _drawerKey,
+        drawer: Drawer(),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
+            child: BottomNavigationBar(
+              currentIndex: _currentIndex,
+              onTap: onTabTapped,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                  label: "Profilim",
+                  icon: new Icon(Icons.account_circle_rounded),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(Icons.mail),
+                  label: "Messagess",
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: "Ana Sayfa"),
+                BottomNavigationBarItem(icon: Icon(Icons.search), label: "Ara"),
+                BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Menü")
+              ],
+            ),
+          ),
+        ),
+        body: _children[_currentIndex]);
   }
-void onTabTapped(int index) {
-   setState(() {
-     _currentIndex = index;
-   });
- }
+
+  void onTabTapped(int index) {
+    setState(() {
+      index == 4 ? _drawerKey.currentState.openDrawer() : _currentIndex = index;
+    });
+  }
 }
 
-
 class MenuText extends StatelessWidget {
- final String txt;
+  final String txt;
+  MenuText(this.txt);
 
- MenuText(this.txt);
-
- @override
- Widget build(BuildContext context) {
-   return Container(
-     child:
-    Center(child: Text(txt)),
-   );
- }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text(txt)),
+    );
+  }
 }
