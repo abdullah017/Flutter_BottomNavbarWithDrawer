@@ -1,6 +1,7 @@
-import 'package:diyet/drawerMenu.dart';
+import 'package:diyet/theme/helpers/textHelper.dart';
+import 'package:diyet/ui/widgets/menu/drawerMenu.dart';
 import 'package:flutter/material.dart';
-import 'listPage.dart';
+import '../../../pages/listPage.dart';
 
 // import 'a_tab_view.dart';
 // import 'b_tab_view.dart';
@@ -55,9 +56,7 @@ class _BnbDemoState extends State<BnbDemo> {
   }
 
   AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('BNB Demo'),
-    );
+    return AppBar(title: kAppBarText);
   }
 
   SafeArea _buildSafeArea() {

@@ -1,5 +1,5 @@
-import 'package:diyet/customBottomMenu.dart';
-import 'package:diyet/drawerMenu.dart';
+import 'package:diyet/ui/widgets/menu/customBottomMenu.dart';
+import 'package:diyet/ui/widgets/menu/drawerMenu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,8 +27,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _drawerKey,
-        drawer: CustomDrawerMenu(),
-        bottomNavigationBar: BnbDemo());
+      key: _drawerKey,
+      drawer: CustomDrawerMenu(),
+      bottomNavigationBar: BnbDemo(),
+    );
   }
 }
